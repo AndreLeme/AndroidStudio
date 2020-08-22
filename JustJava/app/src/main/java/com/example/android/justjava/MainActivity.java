@@ -34,22 +34,29 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
+        int price = calculatePrice();
         // String priceMessage = "Amount due $" + price;
         // String priceMessage = "That would be $" + price + " please";
         // String priceMessage = "You owe " + price + " bucks, dude!";
         // String priceMessage = price + " dollars for " + quantity + " cups of coffee. Pay up";
-        String priceMessage = "Total= $" + price;
-        priceMessage = priceMessage + "\nThank you!";
-        displayMessage(priceMessage);
+        /**
+        * String priceMessage = "Total= $" + price;
+        * priceMessage = priceMessage + "\nThank you!";
+        * displayMessage(priceMessage);
+        **/
+        displayMessage(createOrderSummary(price));
+
+        //calculatePrice(quantity);
+        //calculatePrice(quantity, 10);
+        //calculatePrice();
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int numbered) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + numbered);
     }
 
     /**
@@ -65,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -73,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -84,4 +91,26 @@ public class MainActivity extends AppCompatActivity {
         priceTextView.setText(message);
     }
 
+    /**
+     * Calculates the price of the order.
+     * @return total price
+     */
+    private int calculatePrice() {
+        return quantity * 5;
+    }
+
+    /**
+     * Creates order summary.
+     *
+     * @param price of the order
+     * @return text summary
+     */
+    private String createOrderSummary(int price) {
+        //String msg = "Name: Duh Durd" + "\nQuantity: " + quantity + "\nTotal: $" + calculatePrice() + "\nThank you!";
+        String msg = "Name: Duh Durd";
+        msg += "\nQuantity: " + quantity;
+        msg += "\nTotal: $" + calculatePrice();
+        msg += "\nThank you!";
+        return msg;
+    }
 }
