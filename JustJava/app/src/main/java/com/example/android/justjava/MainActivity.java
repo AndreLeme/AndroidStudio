@@ -11,6 +11,7 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,21 +33,10 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         int price = calculatePrice();
-        // String priceMessage = "Amount due $" + price;
-        // String priceMessage = "That would be $" + price + " please";
-        // String priceMessage = "You owe " + price + " bucks, dude!";
-        // String priceMessage = price + " dollars for " + quantity + " cups of coffee. Pay up";
-        /**
-        * String priceMessage = "Total= $" + price;
-        * priceMessage = priceMessage + "\nThank you!";
-        * displayMessage(priceMessage);
-        **/
-        displayMessage(createOrderSummary(price));
-
-        //calculatePrice(quantity);
-        //calculatePrice(quantity, 10);
-        //calculatePrice();
+        displayMessage(createOrderSummary(price, hasWhippedCream));
     }
 
     /**
@@ -77,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
     }
 
@@ -95,11 +85,15 @@ public class MainActivity extends AppCompatActivity {
      * @param price of the order
      * @return text summary
      */
-    private String createOrderSummary(int price) {
-        //String msg = "Name: Duh Durd" + "\nQuantity: " + quantity + "\nTotal: $" + calculatePrice() + "\nThank you!";
+
+
+
+    private String createOrderSummary(int price, boolean addWhippedCream) {
+
         String msg = "Name: Duh Durd";
+        msg += "\nAdd whipped cream?" + addWhippedCream;
         msg += "\nQuantity: " + quantity;
-        msg += "\nTotal: $" + calculatePrice();
+        msg += "\nTotal: $" + price;
         msg += "\nThank you!";
         return msg;
     }
