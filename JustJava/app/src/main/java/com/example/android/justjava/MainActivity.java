@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        EditText nameText = findViewById(R.id.name_input);
+        String name = nameText.getText().toString();
         CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
         boolean hasChocolate = chocolateCheckBox.isChecked();
-        EditText nameText = findViewById(R.id.name_input);
-        String nameTextValue = nameText.getText().toString();
-        int price = calculatePrice();
-        displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate, nameTextValue));
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
+        displayMessage(createOrderSummary(name, price, hasWhippedCream, hasChocolate));
     }
 
     /**
@@ -78,10 +78,15 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Calculates the price of the order.
+     * @param whippedCream adds $1 to price if user checked it
+     * @param chocolate adds $2 to price if user checked it
      * @return total price
      */
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean whippedCream, boolean chocolate) {
+        int price = 5;
+        if (whippedCream) { price += 1; }
+        if (chocolate) { price += 2; }
+        return (quantity * price);
     }
 
     /**
@@ -95,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate, String nameTextValue) {
+    private String createOrderSummary(String nameTextValue, int price, boolean addWhippedCream, boolean addChocolate) {
 
         String msg = "Name: " + nameTextValue;
         msg += "\nAdd whipped cream? " + addWhippedCream;
