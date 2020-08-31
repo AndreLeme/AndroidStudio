@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         quantity = quantity + 1;
+        if (quantity > 100 ) {
+            Toast.makeText(this, "Maximum is 100 per order", Toast.LENGTH_SHORT).show();
+            quantity = 100;
+        }
         displayQuantity(quantity);
     }
 
@@ -65,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
+        if (quantity < 1 ) {
+            Toast.makeText(this, "This has to be at least 1", Toast.LENGTH_SHORT).show();
+            quantity = 1;
+        }
         displayQuantity(quantity);
     }
 
@@ -91,17 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Creates order summary.
-     *
-     * @param price of the order
-     * @param addWhippedCream
-     * @param addChocolate
+     * @param nameTextValue for name user typed
+     * @param price of the order for total price
+     * @param addWhippedCream if user checked for it
+     * @param addChocolate if user checked for it
      * @return text summary
      */
-
-
-
     private String createOrderSummary(String nameTextValue, int price, boolean addWhippedCream, boolean addChocolate) {
-
         String msg = "Name: " + nameTextValue;
         msg += "\nAdd whipped cream? " + addWhippedCream;
         msg += "\nAdd chocolate? " + addChocolate;
