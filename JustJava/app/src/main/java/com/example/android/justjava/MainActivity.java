@@ -9,6 +9,8 @@
 package com.example.android.justjava;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -42,8 +44,17 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
         boolean hasChocolate = chocolateCheckBox.isChecked();
         int price = calculatePrice(hasWhippedCream, hasChocolate);
-        displayMessage(createOrderSummary(name, price, hasWhippedCream, hasChocolate));
+//        displayMessage(createOrderSummary(name, price, hasWhippedCream, hasChocolate));
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava order for " + name);
+        intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary(name, price, hasWhippedCream, hasChocolate));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
     }
+
 
     /**
      * This method displays the given quantity value on the screen.
@@ -77,13 +88,6 @@ public class MainActivity extends AppCompatActivity {
         displayQuantity(quantity);
     }
 
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
 
     /**
      * Calculates the price of the order.
