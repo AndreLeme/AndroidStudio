@@ -14,4 +14,6 @@
     <string name="order_summary_price">Total: R$<xliff:g id="price" example="$10">%d</xliff:g></string>
     <string name="thank_you">Obrigado!</string>
     <string name="order_summary_email_subject">Pedido Só Java para <xliff:g id="name" example="Amy">%s</xliff:g></string>
+    <string name="minimum_toast">Tem que ser pelo menos <xliff:g id="number" example="1">%d</xliff:g> por pedido</string>
+    <string name="max_toast">Máximo é <xliff:g id="number" example="100">%d</xliff:g> por pedido</string>
 </resources>

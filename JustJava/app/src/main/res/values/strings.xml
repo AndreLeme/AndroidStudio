@@ -67,5 +67,5 @@
     <string name="minimum_toast">This has to be at least <xliff:g id="number" example="1">%d</xliff:g> per order</string>
 
     <!-- Thank you message for the order summary. [CHAR LIMIT=NONE] -->
-    <string name="max_toast">Maximum is <xliff:g id="number" example="100">%d</xliff:g> per order  per order</string>
+    <string name="max_toast">Maximum is <xliff:g id="number" example="100">%d</xliff:g> per order</string>
 </resources>
