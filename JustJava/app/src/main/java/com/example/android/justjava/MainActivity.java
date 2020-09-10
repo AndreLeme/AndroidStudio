@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayQuantity(int numbered) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + numbered);
+        quantityTextView.setText(getString(R.string.display_quantity, quantity));
     }
 
     /**
