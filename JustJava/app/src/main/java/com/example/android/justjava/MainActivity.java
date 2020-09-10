@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 //        displayMessage(createOrderSummary(name, price, hasWhippedCream, hasChocolate));
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava order for " + name);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.order_summary_email_subject, name));
         intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary(name, price, hasWhippedCream, hasChocolate));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public void increment(View view) {
         quantity = quantity + 1;
         if (quantity > 100 ) {
-            Toast.makeText(this, "Maximum is 100 per order", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.max_toast, 100), Toast.LENGTH_SHORT).show();
             quantity = 100;
         }
         displayQuantity(quantity);
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view) {
         quantity = quantity - 1;
         if (quantity < 1 ) {
-            Toast.makeText(this, "This has to be at least 1", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.minimum_toast, 1), Toast.LENGTH_SHORT).show();
             quantity = 1;
         }
         displayQuantity(quantity);
@@ -111,12 +111,12 @@ public class MainActivity extends AppCompatActivity {
      * @return text summary
      */
     private String createOrderSummary(String nameTextValue, int price, boolean addWhippedCream, boolean addChocolate) {
-        String msg = "Name: " + nameTextValue;
-        msg += "\nAdd whipped cream? " + addWhippedCream;
-        msg += "\nAdd chocolate? " + addChocolate;
-        msg += "\nQuantity: " + quantity;
-        msg += "\nTotal: $" + price;
-        msg += "\nThank you!";
+        String msg = getString(R.string.order_summary_name, nameTextValue);
+        msg += "\n" + getString(R.string.order_summary_whipped_cream, addWhippedCream);
+        msg += "\n" + getString(R.string.order_summary_chocolate, addChocolate);
+        msg += "\n" + getString(R.string.order_summary_quantity, quantity);
+        msg += "\n" + getString(R.string.order_summary_price, price);
+        msg += "\n" + getString(R.string.thank_you);
         return msg;
     }
 }
