@@ -7,8 +7,9 @@ import android.content.Context;
  * It contains a default translation and a Miwok translation for that word.
  */
 public class Word {
-    private String mMiwokTranslation;
     private String mDefaultTranslation;
+    private String mMiwokTranslation;
+
 
 
     /**
