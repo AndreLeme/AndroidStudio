@@ -65,7 +65,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         miwoki.setText(currentWord.getMiwokTranslation());
 
         ImageView image = listItemView.findViewById(R.id.image);
-        image.setImageResource(currentWord.getImageResourceId());
+        if(currentWord.getImageResourceId() != 0) {
+            image.setImageResource(currentWord.getImageResourceId());
+            image.setVisibility(View.VISIBLE);
+        } else {image.setVisibility(View.GONE);}
 
         // Return the whole list item layout (containing 2 TextViews)
         // so that it can be shown in the ListView
