@@ -7,8 +7,7 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ImageStyle"
         android:src="@mipmap/ic_launcher"
         />
 
@@ -21,17 +20,14 @@
 
         <TextView
             android:id="@+id/miwoki"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/WordStyle"
+            android:textStyle="bold"
             tools:text="lutti"
             />
 
         <TextView
             android:id="@+id/default_text"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/WordStyle"
             tools:text="one"
             />
 
