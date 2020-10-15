@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:padding="16dp">
+    android:minHeight="@dimen/list_item_height"
+    >
 
     <ImageView
         android:id="@+id/image"
@@ -15,19 +16,23 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="16dp">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        >
 
 
         <TextView
             android:id="@+id/miwoki"
             style="@style/WordStyle"
             android:textStyle="bold"
+            android:gravity="bottom"
             tools:text="lutti"
             />
 
         <TextView
             android:id="@+id/default_text"
             style="@style/WordStyle"
+            android:gravity="top"
             tools:text="one"
             />
 
