@@ -4,15 +4,17 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:minHeight="@dimen/list_item_height"
+    android:background="@color/tan_background"
     >
+
 
     <ImageView
         android:id="@+id/image"
         style="@style/ImageStyle"
-        android:src="@mipmap/ic_launcher"
         />
 
     <LinearLayout
+        android:id="@+id/text_container"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

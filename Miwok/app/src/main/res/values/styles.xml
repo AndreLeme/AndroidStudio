@@ -31,19 +31,18 @@
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
 
-    <!-- Style for words at activities -->
+    <!-- Style for words at translation activities -->
     <style name="WordStyle">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
 
     <!-- Style for images -->
     <style name="ImageStyle">
         <item name="android:layout_height">@dimen/image_size</item>
         <item name="android:layout_width">@dimen/image_size</item>
-        <item name="android:background">@color/tan_background</item>
     </style>
 </resources>
