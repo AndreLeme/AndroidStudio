@@ -77,10 +77,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         // Set the theme color for the list item
         View textContainer = listItemView.findViewById(R.id.text_container);
-        // Find the color that the resource ID maps to
-        int color = ContextCompat.getColor(getContext(), mcolourResourceId);
-        // Set the background color of the text container View
-        textContainer.setBackgroundColor(color);
+          // Set the background color of the text container View
+        textContainer.setBackgroundColor(ContextCompat.getColor(getContext(), mcolourResourceId));
 
         // Return the whole list item layout (containing 2 TextViews)
         // so that it can be shown in the ListView
