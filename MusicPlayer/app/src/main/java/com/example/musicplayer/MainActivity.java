@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
@@ -15,10 +15,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.dontworry);
+
+        Button playButton = findViewById(R.id.play_button);
+        playButton.setOnClickListener(v -> mediaPlayer.start());
+
+        Button pauseButton = findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(v -> mediaPlayer.pause());
+
+        Button rewindButton = findViewById(R.id.rewind_button);
+        rewindButton.setOnClickListener(v -> mediaPlayer.seekTo(0));
+
     }
-
-    public void play(View v) {mediaPlayer.start();}
-    public void pause(View v) {mediaPlayer.pause();}
-    public void reset(View v) {mediaPlayer.seekTo(0);}
-
 }

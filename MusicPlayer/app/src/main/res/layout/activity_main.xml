@@ -8,25 +8,25 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/play_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/play"
-        android:textAllCaps="true"
-        android:onClick="play"/>
+        android:textAllCaps="true" />
 
     <Button
+        android:id="@+id/pause_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/pause"
-        android:textAllCaps="true"
-        android:onClick="pause"/>
+        android:textAllCaps="true" />
 
     <Button
+        android:id="@+id/rewind_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/reset"
-        android:textAllCaps="true"
-        android:onClick="reset"/>
+        android:textAllCaps="true" />
 
 
 
