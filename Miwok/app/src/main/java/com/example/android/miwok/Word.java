@@ -35,4 +35,16 @@ public class Word {
     public int getAudioResourceId() {return mAudioResourceId;}
 
 
+    /**
+     * describe current state of Word object
+     */
+    @Override
+    public String toString() {
+        return "Word{" +
+                "mDefaultTranslation='" + mDefaultTranslation + '\'' +
+                ", mMiwokTranslation='" + mMiwokTranslation + '\'' +
+                ", mImageResourceId=" + mImageResourceId +
+                ", mAudioResourceId=" + mAudioResourceId +
+                '}';
+    }
 }
