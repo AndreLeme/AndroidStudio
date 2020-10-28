@@ -2,6 +2,10 @@ package com.example.android.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +45,71 @@ public class PhrasesActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //
+                audioManager = (AudioManager) Context.getSystemService(Context.AUDIO_SERVICE);
+                playbackAttributes = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_GAME)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build();
+                focusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                        .setAudioAttributes(playbackAttributes)
+                        .setAcceptsDelayedFocusGain(true)
+                        .setOnAudioFocusChangeListener(afChangeListener, handler)
+                        .build();
+                mediaPlayer = new MediaPlayer();
+                final Object focusLock = new Object();
+
+                boolean playbackDelayed = false;
+                boolean playbackNowAuthorized = false;
+
+// ...
+                int res = audioManager.requestAudioFocus(focusRequest);
+                synchronized(focusLock) {
+                    if (res == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
+                        playbackNowAuthorized = false;
+                    } else if (res == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                        playbackNowAuthorized = true;
+                        playbackNow();
+                    } else if (res == AudioManager.AUDIOFOCUS_REQUEST_DELAYED) {
+                        playbackDelayed = true;
+                        playbackNowAuthorized = false;
+                    }
+                }
+
+// ...
+                @Override
+                public void onAudioFocusChange(int focusChange) {
+                    switch (focusChange) {
+                        case AudioManager.AUDIOFOCUS_GAIN:
+                            if (playbackDelayed || resumeOnFocusGain) {
+                                synchronized(focusLock) {
+                                    playbackDelayed = false;
+                                    resumeOnFocusGain = false;
+                                }
+                                playbackNow();
+                            }
+                            break;
+                        case AudioManager.AUDIOFOCUS_LOSS:
+                            synchronized(focusLock) {
+                                resumeOnFocusGain = false;
+                                playbackDelayed = false;
+                            }
+                            pausePlayback();
+                            break;
+                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                            synchronized(focusLock) {
+                                resumeOnFocusGain = true;
+                                playbackDelayed = false;
+                            }
+                            pausePlayback();
+                            break;
+                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                            // ... pausing or ducking depends on your app
+                            break;
+                    }
+                }
+            }
+
                 //Create and setup the {@link MediaPlayer} for the audio resource associated with the current word
                 mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, words.get(position).getAudioResourceId());
                 mMediaPlayer.start();
@@ -48,6 +117,7 @@ public class PhrasesActivity extends AppCompatActivity {
                     @Override
                     public void onCompletion(MediaPlayer mMediaPlayer) {
                         releaseMediaPlayer();
+
                     }
                 });
             }
